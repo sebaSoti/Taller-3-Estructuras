@@ -1,10 +1,11 @@
-import java.nio.charset.StandardCharsets;
+/*
+Integrantes:
+Daniela Gerena Lopera
+Gregorio Carvajal Gaviria
+Sebastián Soto Ángel
+ */
 import java.util.List;
 
-/**
- *
- * @author Daniela
- */
 public class Taller3 {
 
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class Taller3 {
         System.out.println("Lista original:");
         list.printList();
 
-        ListaDoble.mergeSort(list); // call the mergeSort method on the ListaDoble class
+        ListaDoble.mergeSort(list);
 
         System.out.println("\nLista ordenada:");
         list.printList();
@@ -51,8 +52,7 @@ public class Taller3 {
         System.out.println("\nSegunda mitad de la lista");
         splitLists[1].printList();
 
-        // arrayFromInput();
-        int n = 2000; // Número de elementos a generar y ordenar
+        int n = 1024000; // Número de elementos a generar y ordenar
         long startTime, endTime, duration;
 
         // Generar lista de personas
@@ -74,7 +74,4 @@ public class Taller3 {
     }
 
 }
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+

@@ -1,3 +1,4 @@
+
 public class ListaDoble<T extends Comparable<T>> {
     private Nodo<T> head;
     private Nodo<T> tail;
@@ -54,27 +55,27 @@ public class ListaDoble<T extends Comparable<T>> {
         Nodo<T> actual1 = l1.head; //t2f2 = 1 (tiempo constante)
         Nodo<T> actual2 = l2.head; //t3f3 = 1 (tiempo constante)
 
-        while (actual1 != null && actual2 != null) { //t4f4 = n, t5f5 = n-1 (tiempo O(n))
-            if (actual1.data.compareTo(actual2.data) <= 0) { //t6f6 = n-1 (tiempo O(n))
-                mergedList.insert(actual1.data); //t7f7 = n (tiempo O(n))
-                actual1 = actual1.next; //t8f8 = n (tiempo constante)
+        while (actual1 != null && actual2 != null) { //t4f4 = n-1 (tiempo O(n))
+            if (actual1.data.compareTo(actual2.data) <= 0) { //t5f5 = n-1 (tiempo O(n))
+                mergedList.insert(actual1.data); //t6f6 = n (tiempo O(n))
+                actual1 = actual1.next; //t7f7 = n (tiempo constante)
             } else {
-                mergedList.insert(actual2.data); //t9f9 = n (tiempo O(n))
-                actual2 = actual2.next; //t10f10 = n (tiempo constante)
+                mergedList.insert(actual2.data); //t8f8 = n (tiempo O(n))
+                actual2 = actual2.next; //t9f9 = n (tiempo constante)
             }
         }
 
-        while (actual1 != null) { //t11f11 = n/2, t12f12 = n/2 (tiempo O(n))
-            mergedList.insert(actual1.data); //t13f13 = n/2 (tiempo O(n))
-            actual1 = actual1.next; //t14f14 = n/2 (tiempo constante)
+        while (actual1 != null) { //t10f10 = n/2,(tiempo O(n))
+            mergedList.insert(actual1.data); //t11f11 = n/2 (tiempo O(n))
+            actual1 = actual1.next; //t12f12 = n/2 (tiempo constante)
         }
 
-        while (actual2 != null) { //t15f15 = n/2, t16f16 = n/2 (tiempo O(n))
-            mergedList.insert(actual2.data); //t17f17 = n/2 (tiempo O(n))
-            actual2 = actual2.next; //t18f18 = n/2 (tiempo constante)
+        while (actual2 != null) { //t13f13 = n/2, (tiempo O(n))
+            mergedList.insert(actual2.data); //t14f14 = n/2 (tiempo O(n))
+            actual2 = actual2.next; //t15f15 = n/2 (tiempo constante)
         }
 
-        return mergedList; //t19f19 = 1 (tiempo constante)
+        return mergedList; //t16f16 = 1 (tiempo constante)
     }
     //Método de complejidad de tiempo O(n)
 
