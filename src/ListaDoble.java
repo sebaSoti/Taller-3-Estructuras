@@ -1,10 +1,9 @@
-
 public class ListaDoble<T extends Comparable<T>> {
     private Nodo<T> head;
     private Nodo<T> tail;
     private int size;
 
-    private static <T extends Comparable<T>> ListaDoble<T>[] createArray() { //Se le ingresa parámetro de tamaño n?
+    private static <T extends Comparable<T>> ListaDoble<T>[] createArray() {
         @SuppressWarnings("unchecked")
         ListaDoble<T>[] array = (ListaDoble<T>[]) new ListaDoble[2];
         return array;
@@ -12,60 +11,28 @@ public class ListaDoble<T extends Comparable<T>> {
     //Método de tiempo constante O(1)
 
     public ListaDoble<T>[] split() {
-        ListaDoble<T>[] lists = createArray(); //t1f1 = 1 (tiempo constante)
-        lists[0] = new ListaDoble<>(); //t2f2 = 1 (tiempo constante)
-        lists[1] = new ListaDoble<>(); //t3f3 = 1 (tiempo constante)
+        ListaDoble<T>[] listas = createArray(); //t1f1 = 1 (tiempo constante)
+        listas[0] = new ListaDoble<>(); //t2f2 = 1 (tiempo constante)
+        listas[1] = new ListaDoble<>(); //t3f3 = 1 (tiempo constante)
 
-        Nodo<T> slow = head; //t4f4 = 1 (tiempo constante)
-        Nodo<T> fast = head.next; //t5f5 = 1 (tiempo constante)
+        Nodo<T> lento = head; //t4f4 = 1 (tiempo constante)
+        Nodo<T> rapido = head.next; //t5f5 = 1 (tiempo constante)
 
-        while (fast != null) { //t6f6 = n/2 + 1, t7f7 = n/2 (tiempo O(n))
-            fast = fast.next; //t8f8 = n/2 (tiempo constante)
-            if (fast != null) { //t9f9 = n/2 (tiempo constante)
-                slow = slow.next; //t10f10 = n/2 (tiempo constante)
-                fast = fast.next; //t11f11 = n/2 (tiempo constante)
+        while (rapido != null) { //t6f6 = n/2 + 1 = n/2 (tiempo O(n))
+            rapido = rapido.next; //t7f7 = n/2 (tiempo constante)
+            if (rapido != null) { //t8f8 = n/2 (tiempo constante)
+                lento = lento.next; //t9f9 = n/2 (tiempo constante)
+                rapido = rapido.next; //t10f10 = n/2 (tiempo constante)
             }
         }
 
-        lists[0].head = head; //t12f12 = 1 (tiempo constante)
-        lists[1].head = slow.next; //t13f13 = 1 (tiempo constante)
-        slow.next = null; //t14f14 = 1 (tiempo constante)
+        listas[0].head = head; //t11f11 = 1 (tiempo constante)
+        listas[1].head = lento.next; //t12f12 = 1 (tiempo constante)
+        lento.next = null; //t13f13 = 1 (tiempo constante)
 
-        return lists; //t15f15 = 1 (tiempo constante)
+        return listas; //t14f14 = 1 (tiempo constante)
     }
-    //Complejidad O(n)
-    /*public void insert(T data) {
-        Nodo<T> newNode = new Nodo<>(data);
 
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            Nodo<T> current = head;
-
-            if (data.compareTo((T) current.data) < 0) {
-                newNode.next = head;
-                head.prev = newNode;
-                head = newNode;
-            } else {
-                while (current.next != null && data.compareTo((T) current.next.data) > 0) {
-                    current = current.next;
-                }
-
-                if (current.next == null) {
-                    current.next = newNode;
-                    newNode.prev = current;
-                    tail = newNode;
-                } else {
-                    newNode.next = current.next;
-                    newNode.prev = current;
-                    current.next.prev = newNode;
-                    current.next = newNode;
-                }
-            }
-        }
-    }
-    */
     public void insert(T data) {
         Nodo<T> newNode = new Nodo<>(data); //t1f1 = 1 (tiempo constante)
 
@@ -87,30 +54,29 @@ public class ListaDoble<T extends Comparable<T>> {
         Nodo<T> actual1 = l1.head; //t2f2 = 1 (tiempo constante)
         Nodo<T> actual2 = l2.head; //t3f3 = 1 (tiempo constante)
 
-        while (actual1 != null && actual2 != null) { //t4f4 = n1 + n2, t5f5 = n1 + n2 - 1 (tiempo O(n1 + n2))
-            if (actual1.data.compareTo(actual2.data) <= 0) { //t6f6 = n1 + n2 - 1 (tiempo O(n1 + n2))
-                mergedList.insert(actual1.data); //t7f7 = n1 (tiempo O(n1))
-                actual1 = actual1.next; //t8f8 = n1 (tiempo constante)
+        while (actual1 != null && actual2 != null) { //t4f4 = n, t5f5 = n-1 (tiempo O(n))
+            if (actual1.data.compareTo(actual2.data) <= 0) { //t6f6 = n-1 (tiempo O(n))
+                mergedList.insert(actual1.data); //t7f7 = n (tiempo O(n))
+                actual1 = actual1.next; //t8f8 = n (tiempo constante)
             } else {
-                mergedList.insert(actual2.data); //t9f9 = n2 (tiempo O(n2))
-                actual2 = actual2.next; //t10f10 = n2 (tiempo constante)
+                mergedList.insert(actual2.data); //t9f9 = n (tiempo O(n))
+                actual2 = actual2.next; //t10f10 = n (tiempo constante)
             }
         }
 
-        while (actual1 != null) { //t11f11 = n1, t12f12 = n1 (tiempo O(n1))
-            mergedList.insert(actual1.data); //t13f13 = n1 (tiempo O(n1))
-            actual1 = actual1.next; //t14f14 = n1 (tiempo constante)
+        while (actual1 != null) { //t11f11 = n/2, t12f12 = n/2 (tiempo O(n))
+            mergedList.insert(actual1.data); //t13f13 = n/2 (tiempo O(n))
+            actual1 = actual1.next; //t14f14 = n/2 (tiempo constante)
         }
 
-        while (actual2 != null) { //t15f15 = n2, t16f16 = n2 (tiempo O(n2))
-            mergedList.insert(actual2.data); //t17f17 = n2 (tiempo O(n2))
-            actual2 = actual2.next; //t18f18 = n2 (tiempo constante)
+        while (actual2 != null) { //t15f15 = n/2, t16f16 = n/2 (tiempo O(n))
+            mergedList.insert(actual2.data); //t17f17 = n/2 (tiempo O(n))
+            actual2 = actual2.next; //t18f18 = n/2 (tiempo constante)
         }
 
         return mergedList; //t19f19 = 1 (tiempo constante)
     }
-    //Método de complejidad de tiempo O(n + m)?, donde n y m son los tamaños de las listas
-    //Realmente debe de ser de complejidad O(n) el merge
+    //Método de complejidad de tiempo O(n)
 
     public static <T extends Comparable<T>> void mergeSort(ListaDoble<T> list) {
         if (list.head == null || list.head.next == null) { //t1f1 = 1 (tiempo constante)
