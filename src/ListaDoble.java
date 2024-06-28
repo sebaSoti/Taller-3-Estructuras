@@ -33,6 +33,7 @@ public class ListaDoble<T extends Comparable<T>> {
 
         return listas; //t14f14 = 1 (tiempo constante)
     }
+    //Método de complejidad de tiempo O(n)
 
     public void insert(T data) {
         Nodo<T> newNode = new Nodo<>(data); //t1f1 = 1 (tiempo constante)
